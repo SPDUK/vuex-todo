@@ -17,10 +17,28 @@ const actions = {
       "https://jsonplaceholder.typicode.com/todos"
     );
 
-    console.log(data);
+    // first arg = mutation to call
+    // second arg = what to call it with
+    commit("setTodos", data);
+  },
+  // takes in title as second argument
+  async addTodo({ commit }, title) {
+    const { data } = await axios.post(
+      "https://jsonplaceholder.typicode.com/todos",
+      {
+        title,
+        completed: false
+      }
+    );
+
+    commit("newTodo", data);
   }
 };
 // mutation updates state
-const mutations = {};
+// first arg = current state, second is the argument being passed by the commit
+const mutations = {
+  setTodos: (state, todos) => (state.todos = todos),
+  newTodo: (state, todo) => state.todos.unshift(todo)
+};
 
 export default { state, getters, actions, mutations };
