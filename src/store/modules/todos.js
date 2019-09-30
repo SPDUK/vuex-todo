@@ -1,19 +1,26 @@
 import axios from "axios";
 
 const state = {
-  todos: [
-    { id: 1, title: "hi" },
-    { id: 2, title: "hi1" },
-    { id: 3, title: "hi2" },
-    { id: 4, title: "hi3" }
-  ]
+  todos: []
 };
 
 const getters = {
   allTodos: state => state.todos
 };
 
-const actions = {};
+// action -> gets response -> mutation
+// actions can be async, mutations can't
+// takes object as argument
+const actions = {
+  async fetchTodos({ commit }) {
+    const { data } = await axios.get(
+      "https://jsonplaceholder.typicode.com/todos"
+    );
+
+    console.log(data);
+  }
+};
+// mutation updates state
 const mutations = {};
 
 export default { state, getters, actions, mutations };
