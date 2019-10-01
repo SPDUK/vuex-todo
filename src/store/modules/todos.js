@@ -32,13 +32,22 @@ const actions = {
     );
 
     commit("newTodo", data);
+  },
+  async deleteTodo({ commit }, id) {
+    const { data } = await axios.delete(
+      `https://jsonplaceholder.typicode.com/todos/${id}`
+    );
+
+    commit("removeTodo", id);
   }
 };
 // mutation updates state
 // first arg = current state, second is the argument being passed by the commit
 const mutations = {
   setTodos: (state, todos) => (state.todos = todos),
-  newTodo: (state, todo) => state.todos.unshift(todo)
+  newTodo: (state, todo) => state.todos.unshift(todo),
+  removeTodo: (state, id) =>
+    (state.todos = state.todos.filter(todo => todo.id !== id))
 };
 
 export default { state, getters, actions, mutations };

@@ -4,7 +4,7 @@
     <div class="todos">
       <!-- :key is shorthand for v-bind:key  -->
       <div v-for="todo in allTodos" :key="todo.id" class="todo">
-        <i class="fas fa-trash"></i>
+        <i @click="deleteTodo(todo.id)" class="fas fa-trash"></i>
         {{ todo.title }}
       </div>
     </div>
@@ -21,7 +21,7 @@ export default {
   computed: mapGetters(["allTodos"]),
   // spread actions because so we have other methods too
   methods: {
-    ...mapActions(["fetchTodos"])
+    ...mapActions(["fetchTodos", "deleteTodo"])
   },
   created() {
     this.fetchTodos();
