@@ -4,6 +4,7 @@
     <div class="todos">
       <!-- :key is shorthand for v-bind:key  -->
       <div v-for="todo in allTodos" :key="todo.id" class="todo">
+        <i class="fas fa-trash"></i>
         {{ todo.title }}
       </div>
     </div>
